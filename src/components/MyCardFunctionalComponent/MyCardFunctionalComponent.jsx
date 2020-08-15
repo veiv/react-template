@@ -4,9 +4,11 @@ import { Button, Typography, TextField } from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
+import blueGrey from "@material-ui/core/colors/blueGrey";
 
 const useStyles = makeStyles(() => ({
     cardStyles: {
+        background: blueGrey[900],
         padding: "15px",
     },
     generalStyles: {

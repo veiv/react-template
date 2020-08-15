@@ -1,8 +1,8 @@
 import React from "react";
-import Content from "components/Content";
+import ContentSection from "components/ContentSection/ContentSection";
 
 function App() {
-    return <Content />;
+    return <ContentSection />;
 }
 
 export default App;
