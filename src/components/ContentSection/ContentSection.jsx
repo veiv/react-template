@@ -7,6 +7,7 @@ import WelcomePage from "pages/WelcomePage";
 const useStyles = makeStyles(() => ({
     paperStyles: {
         "min-height": "100vh",
+        overflow: "hidden",
     },
 }));
 

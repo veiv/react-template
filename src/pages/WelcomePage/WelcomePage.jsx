@@ -10,7 +10,7 @@ import projectData from "../../res/projectData.json";
 
 const useStyles = makeStyles(() => ({
     gridContainerStyles: {
-        "padding-top": "10vh",
+        "padding-top": "30px",
     },
     separatorStyles: {
         height: "20px",
