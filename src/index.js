@@ -9,7 +9,7 @@ import "./index.css";
 ReactDOM.render(
     <React.StrictMode>
         <ThemeProvider theme={theme}>
-            <App />
+            <App data-testid="appComponent" />
         </ThemeProvider>
     </React.StrictMode>,
     document.getElementById("root")
