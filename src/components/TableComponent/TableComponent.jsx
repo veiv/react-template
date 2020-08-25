@@ -36,7 +36,7 @@ export default function TableComponent() {
 
   async function fetchPosts() {
     const response = await axios.get(
-      'http://jsonplaceholder.typicode.com/posts'
+      'https://jsonplaceholder.typicode.com/posts'
     );
     setPosts(response.data.slice(0, 9));
   }
