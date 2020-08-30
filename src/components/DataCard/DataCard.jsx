@@ -1,9 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { makeStyles } from '@material-ui/styles';
-import { Typography } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import { Typography, Card, CardContent } from '@material-ui/core';
 import red from '@material-ui/core/colors/red';
 import DeleteIcon from '@material-ui/icons/Delete';
 
@@ -25,7 +23,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function DataCard({ userId, id, body, title, deletePost }) {
+const DataCard = ({ userId, id, body, title, deletePost }) => {
   const classes = useStyles();
 
   return (
@@ -80,6 +78,6 @@ function DataCard({ userId, id, body, title, deletePost }) {
       </CardContent>
     </Card>
   );
-}
+};
 
 export default DataCard;

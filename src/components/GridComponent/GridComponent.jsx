@@ -12,39 +12,39 @@ const useStyles = makeStyles({
   },
 });
 
-export default function GridComponent() {
+const GridComponent = () => {
   const classes = useStyles();
 
   const [posts, setPosts] = useState([]);
 
   const [values, setValues] = useState({});
 
-  async function fetchPosts() {
+  const fetchPosts = async () => {
     const response = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     );
     setPosts(response.data.slice(0, 9));
-  }
+  };
 
-  function addPost(postData) {
+  const addPost = (postData) => {
     const newPost = {
       ...postData,
       id: posts.length + 1,
     };
     setPosts([newPost, ...posts]);
-  }
+  };
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { target } = event;
     const { name, value } = target;
     event.persist();
     setValues({ ...values, [name]: value });
-  }
+  };
 
-  function deletePost(id) {
+  const deletePost = (id) => {
     const items = posts.filter((row) => row.id !== id);
     setPosts(items);
-  }
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -77,4 +77,6 @@ export default function GridComponent() {
       </Grid>
     </>
   );
-}
+};
+
+export default GridComponent;

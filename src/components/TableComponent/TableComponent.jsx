@@ -27,51 +27,51 @@ const useStyles = makeStyles({
   },
 });
 
-export default function TableComponent() {
+const TableComponent = () => {
   const classes = useStyles();
 
   const [posts, setPosts] = useState([]);
 
   const [values, setValues] = useState({});
 
-  async function fetchPosts() {
+  const fetchPosts = async () => {
     const response = await axios.get(
       'https://jsonplaceholder.typicode.com/posts'
     );
     setPosts(response.data.slice(0, 9));
-  }
+  };
 
-  function deletePost(id) {
+  const deletePost = (id) => {
     const items = posts.filter((row) => row.id !== id);
     setPosts(items);
-  }
+  };
 
-  function addPost(postData) {
+  const addPost = (postData) => {
     const newPost = {
       ...postData,
       id: posts.length + 1,
     };
     setPosts([newPost, ...posts]);
     setValues({});
-  }
+  };
 
-  function searchPost(string) {
+  const searchPost = (string) => {
     const items = posts.filter(
       (post) => post.body.includes(string) || post.title.includes(string)
     );
     setPosts(items);
-  }
+  };
 
   useEffect(() => {
     fetchPosts();
   }, []);
 
-  function handleChange(event) {
+  const handleChange = (event) => {
     const { target } = event;
     const { name, value } = target;
     event.persist();
     setValues({ ...values, [name]: value });
-  }
+  };
 
   return (
     <>
@@ -138,4 +138,6 @@ export default function TableComponent() {
       </TableContainer>
     </>
   );
-}
+};
+
+export default TableComponent;

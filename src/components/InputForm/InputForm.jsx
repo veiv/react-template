@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function InputForm({ values, handleChange, addPost }) {
+const InputForm = ({ values, handleChange, addPost }) => {
   const classes = useStyles();
 
   return (
@@ -65,4 +65,6 @@ export default function InputForm({ values, handleChange, addPost }) {
       </Grid>
     </form>
   );
-}
+};
+
+export default InputForm;
