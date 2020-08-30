@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import AddIcon from '@material-ui/icons/Add';
 import { makeStyles } from '@material-ui/core/styles';
+import { createPost, fetchPosts } from '../../store/actions/postActions';
+import { useDispatch } from 'react-redux';
 
 const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
-  },
   button: {
     marginTop: '15px',
     marginLeft: '5px',
@@ -17,8 +16,18 @@ const useStyles = makeStyles({
   },
 });
 
-const InputForm = ({ values, handleChange, addPost }) => {
+const InputForm = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
+
+  const [values, setValues] = useState({});
+
+  const handleChange = (event) => {
+    const { target } = event;
+    const { name, value } = target;
+    event.persist();
+    setValues({ ...values, [name]: value });
+  };
 
   return (
     <form className={classes.myForm} noValidate autoComplete="off">
@@ -52,11 +61,14 @@ const InputForm = ({ values, handleChange, addPost }) => {
             className={classes.button}
             onClick={(event) => {
               event.preventDefault();
-              addPost({
-                userId: values.userId,
-                title: values.title,
-                body: values.body,
-              });
+              dispatch(
+                createPost({
+                  userId: values.userId,
+                  title: values.title,
+                  body: values.body,
+                })
+              );
+              dispatch(fetchPosts());
             }}
           >
             <AddIcon />

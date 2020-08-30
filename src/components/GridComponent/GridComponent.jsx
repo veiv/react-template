@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import DataCard from 'components/DataCard';
-import axios from 'axios';
 import InputForm from 'components/InputForm';
+import { deletePost, resetPosts } from '../../store/actions/postActions';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useStyles = makeStyles({
   gridContainer: {
@@ -14,49 +15,17 @@ const useStyles = makeStyles({
 
 const GridComponent = () => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const [posts, setPosts] = useState([]);
-
-  const [values, setValues] = useState({});
-
-  const fetchPosts = async () => {
-    const response = await axios.get(
-      'https://jsonplaceholder.typicode.com/posts'
-    );
-    setPosts(response.data.slice(0, 9));
-  };
-
-  const addPost = (postData) => {
-    const newPost = {
-      ...postData,
-      id: posts.length + 1,
-    };
-    setPosts([newPost, ...posts]);
-  };
-
-  const handleChange = (event) => {
-    const { target } = event;
-    const { name, value } = target;
-    event.persist();
-    setValues({ ...values, [name]: value });
-  };
-
-  const deletePost = (id) => {
-    const items = posts.filter((row) => row.id !== id);
-    setPosts(items);
-  };
+  const posts = useSelector((state) => state.posts.items);
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    dispatch(resetPosts());
+  }, [dispatch]);
 
   return (
     <>
-      <InputForm
-        values={values}
-        handleChange={handleChange}
-        addPost={addPost}
-      />
+      <InputForm />
       <Grid
         container
         spacing={4}
@@ -70,7 +39,7 @@ const GridComponent = () => {
               id={post.id}
               body={post.body}
               title={post.title}
-              deletePost={deletePost}
+              deletePost={() => dispatch(deletePost(post.id))}
             />
           </Grid>
         ))}
